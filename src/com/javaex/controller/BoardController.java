@@ -34,6 +34,19 @@ public class BoardController extends HttpServlet {
 			
 		} else if ("delete".equals(action)) {
 			
+			System.out.println("action=delete");
+			
+			int no = Integer.parseInt(request.getParameter("no"));
+			
+			BoardVo boardVo = new BoardVo();
+			boardVo.setNo(no);
+			
+			BoardDao boardDao = new BoardDao();
+			
+			boardDao.delete(boardVo);
+		
+			WebUtil.redirect(request, response, "/mysite/board");
+			
 		} else {
 			BoardDao boardDao = new BoardDao();
 			List<BoardVo> boardList = boardDao.getList();

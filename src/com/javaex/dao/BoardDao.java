@@ -69,7 +69,7 @@ public class BoardDao {
 			query += "         title, ";
 			query += "         content, ";
 			query += "         hit, ";
-			query += "         to_char(reg_date, 'yyyy-mm-dd hh:mi:ss') reg_date, ";
+			query += "         to_char(reg_date, 'yyyy-mm-dd') reg_date, ";
 			query += "         user_no ";
 			query += " from board ";
 			query += " order by reg_date desc ";
@@ -101,4 +101,37 @@ public class BoardDao {
 
 		return boardList;
 	}
+	
+	// 게시판 글 삭제
+	public void delete(BoardVo boardVo) {
+		int count = 0;
+		
+		getConnection();
+		
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			// 문자열
+			String query = "";
+			query += " delete from board ";
+			query += " where no = ? ";
+			
+			// 쿼리문
+			pstmt = conn.prepareStatement(query);
+			
+			// 바인딩
+			pstmt.setInt(1, boardVo.getNo());
+
+			// 실행
+			count = pstmt.executeUpdate();
+			
+			// 4.결과처리
+			System.out.println(count + "건 삭제되었습니다.");
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		
+		close();
+	}
+	
 }

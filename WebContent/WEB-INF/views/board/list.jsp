@@ -74,7 +74,7 @@
 									<td>${bVo.name}</td>
 									<td>${bVo.hit}</td>
 									<td>${bVo.reg_date}</td>
-									<td><a href="/mysite/board?action=delete">[삭제]</a></td>
+									<td><a href="/mysite/board?action=delete&no=${bVo.no}">[삭제]</a></td>
 								</tr>
 								</c:forEach>
 							</tbody>						
